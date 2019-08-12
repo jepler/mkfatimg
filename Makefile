@@ -1,4 +1,4 @@
-OOFATSRCS := ff.c ffsystem.c ffunicode.c
+OOFATSRCS := ff.c ffunicode.c
 OOFATOBJS := $(patsubst %.c, .o/%.o, $(OOFATSRCS))
 
 mkfatimg: .o/main.o $(OOFATOBJS)

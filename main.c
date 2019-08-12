@@ -10,6 +10,14 @@
 #include "oofatfs/src/ff.h"
 #include "oofatfs/src/diskio.h"
 
+void *ff_memalloc(UINT size) {
+    return calloc(1,size);
+}
+
+void ff_memfree(void *ptr) {
+    free(ptr);
+}
+
 int fd;
 size_t blockcount;
 
