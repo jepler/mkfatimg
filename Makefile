@@ -19,6 +19,7 @@ clean:
 .PHONY: test
 test: mkfatimg
 	@mkdir -p .o
-	./mkfatimg .o/img.bin IMAGE 512 --circuitpython=boot.py
+	SOURCE_DATE_EPOCH=1565618716 TZ=UTC \
+		./mkfatimg .o/img.bin IMAGE 512 --circuitpython=boot.py
 	MTOOLSRC=mtoolsrc mdir a:/ -/ | tee .o/mdir.out.txt
 	diff mdir.expected.txt .o/mdir.out.txt

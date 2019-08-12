@@ -5,6 +5,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <time.h>
 #include <unistd.h>
 
 #include "oofatfs/src/ff.h"
@@ -26,7 +27,8 @@ void perror_fatal(const char *msg) {
     exit(1);
 }
 
-DWORD get_fattime (void) { return 0; }
+DWORD fattime;
+DWORD get_fattime (void) { return fattime; }
 
 DSTATUS disk_initialize (BYTE pdrv) {
     return RES_OK;
@@ -188,6 +190,22 @@ void do_one_file(const char *filename_ro) {
 }
 
 int main(int argc, char **argv) {
+    const char *SOURCE_DATE_EPOCH_STRING = getenv("SOURCE_DATE_EPOCH");
+    time_t unix_timestamp;
+    if(SOURCE_DATE_EPOCH_STRING)
+        unix_timestamp = (time_t)strtoull(SOURCE_DATE_EPOCH_STRING, NULL, 0);
+    else
+        unix_timestamp = time(NULL);
+
+    struct tm *t = localtime(&unix_timestamp);
+    fattime =
+        (((t->tm_year - 80) & 127) << 25) |
+        ((t->tm_mon+1) << 21) |
+        ((t->tm_mday) << 16) |
+        ((t->tm_hour) << 11) |
+        ((t->tm_min) << 5) |
+        (t->tm_sec / 2);
+
     if(argc < 4) 
         usage(argv[0], 1);
     const char *dest = argv[1];
