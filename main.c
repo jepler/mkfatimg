@@ -57,7 +57,7 @@ DRESULT disk_ioctl (BYTE pdrv, BYTE cmd, void* buff) {
         case GET_SECTOR_SIZE:
             *(WORD*)buff = 512; return RES_OK;
         case GET_SECTOR_COUNT:
-            *(WORD*)buff = blockcount; return RES_OK;
+            *(DWORD*)buff = blockcount; return RES_OK;
         default:
             return RES_ERROR;
     }
