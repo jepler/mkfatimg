@@ -151,6 +151,11 @@ void do_one_file(const char *filename_ro) {
     FRESULT fr = f_open(&fp, dst, FA_WRITE | FA_CREATE_ALWAYS);
     if(fr) fresult_fatal("f_open", fr);
 
+    if(!*src) {
+        f_close(&fp);
+        return;
+    }
+
     int ifd = open(src, O_RDONLY);
     if(ifd < 0) perror("open");
 
