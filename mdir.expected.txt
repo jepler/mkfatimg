@@ -1,0 +1,21 @@
+ Volume in drive A is IMAGE      
+ Volume Serial Number is 0000-0000
+Directory for A:/
+
+main     py         21 1980-00-00   0:00 
+~1       FSE <DIR>     1980-00-00   0:00  .fseventsd
+~1       MET         0 1980-00-00   0:00  .metadata_never_index
+~1       TRA         0 1980-00-00   0:00  .Trashes
+        4 files                  21 bytes
+
+Directory for A:/.fseventsd
+
+.            <DIR>     1980-00-00   0:00 
+..           <DIR>     1980-00-00   0:00 
+no_log               0 1980-00-00   0:00 
+        3 files                   0 bytes
+
+Total files listed:
+        7 files                  21 bytes
+                            243 200 bytes free
+
