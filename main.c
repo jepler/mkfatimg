@@ -129,7 +129,9 @@ bool endswith(const char *haystack, char needle) {
     return *haystack == needle;
 }
 
-void do_one_file(char *filename) {
+void do_one_file(const char *filename_ro) {
+    char filename[1024];
+    snprintf(filename, sizeof(filename), "%s", filename_ro);
     if(endswith(filename, '/')) {
         f_mkdir(filename);
         return;
