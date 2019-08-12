@@ -130,6 +130,8 @@ bool endswith(const char *haystack, char needle) {
 }
 
 void do_one_file(const char *filename_ro) {
+    printf("%s\n", filename_ro); fflush(stdout);
+
     char filename[1024];
     snprintf(filename, sizeof(filename), "%s", filename_ro);
     if(endswith(filename, '/')) {
