@@ -46,7 +46,6 @@ DRESULT disk_ioctl (BYTE pdrv, BYTE cmd, void* buff) {
             return RES_OK;
         case CTRL_SYNC:
             return RES_OK;
-        case GET_BLOCK_SIZE:
         case GET_SECTOR_SIZE:
             *(WORD*)buff = 512; return RES_OK;
         case GET_SECTOR_COUNT:
@@ -143,7 +142,7 @@ void do_one_file(char *filename) {
 
     while(1) {
         char buf[512];
-        ssize_t nread = read(fd, buf, sizeof(buf));
+        ssize_t nread = read(ifd, buf, sizeof(buf));
         if(nread == 0) break;
         if(nread < 0) perror("read");
 
@@ -151,7 +150,7 @@ void do_one_file(char *filename) {
         fr = f_write(&fp, buf, (UINT)nread, &nwritten);
         if(fr) fresult_fatal("f_write", fr);
     }
-    close(fd);
+    close(ifd);
     f_close(&fp);
 }
 
