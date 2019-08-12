@@ -189,6 +189,8 @@ int main(int argc, char **argv) {
     uint8_t working_buf[512];
 
     FATFS fs;
+    memset(&fs, 0, sizeof(fs));
+
     FRESULT fr;
     fr = f_mount(&fs, "", 0);
     if(fr) fresult_fatal("f_mount (1)", fr);
