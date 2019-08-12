@@ -4,9 +4,11 @@ OOFATOBJS := $(patsubst %.c, .o/%.o, $(OOFATSRCS))
 mkfatimg: .o/main.o $(OOFATOBJS)
 	gcc -g -Og -o $@ $^
 
+CFLAGS := -g -Og -Wall
+.o/ffsystem.o: CFLAGS += -include stdlib.h
 .o/%.o: %.c Makefile
 	@mkdir -p $(dir $@)
-	gcc -g -Og -c -o $@ $< -MD -MF ".o/$*.d" -MT "$@"
+	gcc $(CFLAGS) -c -o $@ $< -MD -MF ".o/$*.d" -MT "$@"
 
 -include $(patsubst %.c, .o/%.d, $(OOFATSRCS) main.c)
 
