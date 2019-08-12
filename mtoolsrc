@@ -1,0 +1,4 @@
+# MTOOLSRC=mtoolsrc
+mtools_skip_check=1
+drive a:
+    file=".o/img.bin"
