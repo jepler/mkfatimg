@@ -147,6 +147,20 @@ void do_one_file(const char *filename_ro) {
         *eq = 0;
         src = eq + 1;
     }
+
+    if(!strcmp(dst, "--circuitpython")) {
+        if(src != dst) {
+            char buf[1024];
+            snprintf(buf, sizeof(buf), "main.py=%s", src); 
+            do_one_file(buf);
+        }
+        do_one_file(".fseventsd/");
+        do_one_file(".fseventsd/no_log=");
+        do_one_file(".metadata_never_index=");
+        do_one_file(".Trashes=");
+        return;
+    }
+
     FIL fp;
     FRESULT fr = f_open(&fp, dst, FA_WRITE | FA_CREATE_ALWAYS);
     if(fr) fresult_fatal("f_open", fr);
