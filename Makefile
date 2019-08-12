@@ -15,3 +15,10 @@ CFLAGS := -g -Og -Wall
 .PHONY: clean
 clean:
 	rm -rf .o mkfatimg
+
+.PHONY: test
+test: mkfatimg
+	@mkdir -p .o
+	./mkfatimg .o/img.bin IMAGE 512 --circuitpython=boot.py
+	MTOOLSRC=mtoolsrc mdir a:/ -/ | tee .o/mdir.out.txt
+	diff mdir.expected.txt .o/mdir.out.txt
