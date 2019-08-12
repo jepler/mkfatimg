@@ -133,7 +133,9 @@ void do_one_file(const char *filename_ro) {
     char filename[1024];
     snprintf(filename, sizeof(filename), "%s", filename_ro);
     if(endswith(filename, '/')) {
-        f_mkdir(filename);
+        filename[strlen(filename)-1] = 0;
+        FRESULT fr = f_mkdir(filename);
+        if(fr) fresult_fatal("f_mkdir", fr);
         return;
     }
     char *eq = strchr(filename, '=');
